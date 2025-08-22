@@ -18,6 +18,8 @@
 
   --danger : #E25858;
 
+  
+
 }
 
 * {
@@ -28,4 +30,5 @@
 
 body {
   overflow: hidden;
+  font-family: "Inter";
 }
