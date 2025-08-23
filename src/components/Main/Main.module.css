@@ -11,21 +11,24 @@
 
 .tasks {
     width: 46rem;
-    height: 20rem;
-
+    height: 30rem;
+ 
     display: flex;
-    justify-content: center;
-    gap: 4rem;
+    gap: 2rem;
     color: white;
     flex-direction: column;
+    position: absolute;
 }
 
 .newTask {
+    
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    margin-top: -14rem;
+    margin-top: -1.5rem;
+    
+    
 
 
     input {
@@ -40,6 +43,7 @@
         border: none;
         outline: none;
         color: var(--gray-100);
+        width: 100%;
     }
 
     .buttonCreate {
@@ -47,7 +51,7 @@
         align-items: center;
         background: var(--blue-dark);
         color: var(--gray-100);
-        width: 5.6rem;
+        width: 6rem;
         height: 3.25rem;
         border-radius: 8px;
         border: none;
@@ -80,14 +84,93 @@
     justify-content: space-between;
 }
 
-.tasksCreated span {
-    color: var(--blue);
-    font-weight: bold;
+.tasksCreated {
+    display: flex;
+    gap: 6px;
+    align-items: center;
 }
 
-.tasksFinished span {
+.tasksInfo {
+    color: var(--blue);
+    font-weight: bold;
+    display: flex;
+    
+}
+
+.tasksFinished {
+    
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 2px;
+    gap: 6px;
+
+   
+}
+
+.done {
     color: var(--purple);
     font-weight: bold;
 
 }
 
+.doneCount {
+    background: var(--gray-400);
+    width: 52px;
+    height: 24px;
+    border-radius:12px;
+    color: var(--gray-200);
+
+    font-size: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.tasksList {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: space-between;
+    
+}
+
+.tasksCount {
+    background: var(--gray-400);
+    width: 32px;
+    height: 24px;
+    border-radius: 50%;
+    color: var(--gray-200);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 2px;
+
+    font-size: 12px;
+}
+
+.alternative {
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  margin-top: 4rem;
+  align-items: center;
+
+  img {
+    height: 54px;
+    width: 54px;
+  }
+
+  
+}
+.alternative > div {
+    display: flex;
+    margin-top: 1rem;
+    flex-direction: column;
+    color: var(--gray-300);
+}
