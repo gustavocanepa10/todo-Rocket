@@ -1,9 +1,10 @@
-import { useState, type FormEvent, type ChangeEvent } from "react";
+import { useState, type FormEvent, type ChangeEvent, type FormEventHandler } from "react";
 import { Task } from "../Task/Task";
 import styles from "./Main.module.css";
 import { CirclePlus } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Clipboard from "../../assets/Clipboard.svg"
+import {useForm} from "react-hook-form"
 
 type TaskProp = {
   id: string;
@@ -11,10 +12,18 @@ type TaskProp = {
   isChecked: boolean;
 };
 
+type FormData = {
+  task : string
+}
+
+
+
+
 export function Main() {
   const [tasks, setTasks] = useState<TaskProp[]>([]);
 
-  const [taskName, setTaskName] = useState("");
+  const {handleSubmit, watch, register, resetField} = useForm<FormData>()
+
 
   const [isChecked] = useState(false);
 
@@ -24,9 +33,8 @@ export function Main() {
 
   const tasksDoneCount = tasksDone.length;
 
-  function handleTask(event: ChangeEvent<HTMLInputElement>) {
-    setTaskName(event.target.value);
-  }
+ const task = watch("task")
+ const isSubmitDisabled = !task
 
   function toggleTask(idTask: string) {
     setTasks((tasks) =>
@@ -36,17 +44,20 @@ export function Main() {
     );
   }
 
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
+  function submit(data : FormData) {
+    
+    const newTask : TaskProp = {
+      id : uuidv4(),
+      name : data.task,
+      isChecked : false
 
-    const newTask: TaskProp = {
-      id: uuidv4(),
-      name: taskName,
-      isChecked,
-    };
+    }
+    
 
     setTasks([...tasks, newTask]);
-    setTaskName("");
+    console.log(tasks)
+    resetField("task")
+    
   }
 
   function handleDeleteTask(id: string) {
@@ -56,15 +67,15 @@ export function Main() {
   return (
     <main className={styles.main}>
       <div className={styles.tasks}>
-        <form className={styles.newTask}>
+        <form onSubmit={handleSubmit(submit)} className={styles.newTask}>
           <input
             type="text"
+            id="task"
             placeholder="Adicione uma nova tarefa"
-            value={taskName}
-            onChange={handleTask}
+            {...register("task")}
           />
 
-          <button onClick={handleSubmit} className={styles.buttonCreate}>
+          <button disabled = {isSubmitDisabled} onClick={handleSubmit(submit)} className={styles.buttonCreate}>
             <span>Criar</span>
             <CirclePlus />
           </button>
