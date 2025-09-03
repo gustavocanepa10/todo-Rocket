@@ -22,7 +22,11 @@ type FormData = {
 export function Main() {
   const [tasks, setTasks] = useState<TaskProp[]>([]);
 
-  const {handleSubmit, watch, register, resetField} = useForm<FormData>()
+  const {handleSubmit, watch, register, reset} = useForm<FormData>({
+    defaultValues : {
+      task : ""
+    }
+  })
 
 
   const [isChecked] = useState(false);
@@ -34,7 +38,7 @@ export function Main() {
   const tasksDoneCount = tasksDone.length;
 
  const task = watch("task")
- const isSubmitDisabled = !task
+ const isSubmitDisabled = !task.length
 
   function toggleTask(idTask: string) {
     setTasks((tasks) =>
@@ -56,7 +60,7 @@ export function Main() {
 
     setTasks([...tasks, newTask]);
     console.log(tasks)
-    resetField("task")
+    reset()
     
   }
 
@@ -75,7 +79,7 @@ export function Main() {
             {...register("task")}
           />
 
-          <button disabled = {isSubmitDisabled} onClick={handleSubmit(submit)} className={styles.buttonCreate}>
+          <button  onClick={handleSubmit(submit)} className={`${isSubmitDisabled ? styles.buttonDisabled : styles.buttonCreate}` }>
             <span>Criar</span>
             <CirclePlus />
           </button>

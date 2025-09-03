@@ -75,7 +75,35 @@
     .buttonCreate:hover {
         background: var(--blue);
     }
+
+    
 }
+
+.buttonDisabled {
+    display: flex;
+        align-items: center;
+        background: var(--blue-dark);
+        color: var(--gray-100);
+        width: 6rem;
+        height: 3.25rem;
+        border-radius: 8px;
+        border: none;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem 1rem;
+        opacity: 0.8;
+        
+
+
+        span {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+    }
 
 .info {
     width: 100%;
